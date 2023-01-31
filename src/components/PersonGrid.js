@@ -2,12 +2,12 @@ import PersonRow from './PersonRow'
 import PersonGridFilter from './PersonGridFilter'
 import './PersonGrid.css'
 import { useState, useEffect } from 'react'
+import { filterData } from '../utils/filter'
 
 const PersonGrid = () => {
+  const [data, setData] = useState([]);
   const [firstNamePrefix, setFirstNamePrefix] = useState("");
   const [onlyActive, setOnlyActive] = useState(false);
-
-  const [data, setData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -30,14 +30,6 @@ const PersonGrid = () => {
   const onOnlyActiveChangeHandler = (e) =>
     setOnlyActive(e.target.checked);
 
-  const filterData = () => 
-    data.filter(
-      (item) => {
-        const fnLowerTest = item.Name.toLowerCase().startsWith(firstNamePrefix);
-        const activeTest = !onlyActive || (onlyActive && item.is_active)
-        return fnLowerTest && activeTest
-      });
-
   return (
     <table data-testid="tid-1" className="styled-table">
       <thead>
@@ -53,7 +45,7 @@ const PersonGrid = () => {
           onOnlyActiveChange={onOnlyActiveChangeHandler} />}
       </thead>
       <tbody >
-        {filterData().map((item) => {
+        {filterData(data, firstNamePrefix, onlyActive).map((item) => {
           return (<PersonRow key={item.id} {...item}></PersonRow>)
         })}
       </tbody>
@@ -61,5 +53,6 @@ const PersonGrid = () => {
     </table>
   )
 }
+
 
 export default PersonGrid
