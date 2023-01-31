@@ -1,12 +1,14 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, cleanup, waitForElement, fireEvent } from "@testing-library/react";
 import PersonGrid from "../PersonGrid";
 import { filterData } from "../../utils/filter";
+
 afterEach(() => {
   cleanup();
 });
 
+// Integration
 describe("PersonGrid component", () => {
-  test("it renders PersonGrid component", () => {
+  it("renders PersonGrid component", () => {
     render(<PersonGrid />);
     const element = screen.getByTestId("tid-1");
     expect(element).toBeInTheDocument();
@@ -18,8 +20,9 @@ describe("PersonGrid component", () => {
   });
 });
 
+// Unit test
 describe("filterData function", () => {
-  test("it filters data based on first name prefix and active status", () => {
+  it("filters data based on first name prefix and active status", () => {
     const data = [
       { Name: "John", is_active: true },
       { Name: "Jane", is_active: false },

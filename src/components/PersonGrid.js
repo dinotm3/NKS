@@ -15,12 +15,12 @@ const PersonGrid = () => {
   };
 
   useEffect(() => {
+    // can not be pure because of setData
     async function fetchData() {
       var requestOptions = {
         method: "GET",
         redirect: "follow",
       };
-
       const response = await fetch(
         "http://www.fulek.com/nks/api/aw/customers",
         requestOptions
@@ -32,9 +32,11 @@ const PersonGrid = () => {
     fetchData();
   }, []);
 
+  // Pure fuction, immutability of e
   const onFirstNameChangeHandler = (e) =>
     setFirstNamePrefix(e.target.value.toLowerCase());
 
+  // Pure fuction, immutability of e
   const onOnlyActiveChangeHandler = (e) => setOnlyActive(e.target.checked);
 
   return (

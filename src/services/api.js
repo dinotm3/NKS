@@ -1,12 +1,12 @@
 import { headers } from "../utils/constants";
 
-async function getAll() {
-  const requestOptions = {
-    method: "GET",
-    headers: headers,
-  };
-  return await fetch(process.env.REACT_APP_API_URL, requestOptions);
-}
+// async function getAll() {
+//   const requestOptions = {
+//     method: "GET",
+//     headers: headers,
+//   };
+//   return await fetch(process.env.REACT_APP_API_URL, requestOptions);
+// }
 
 /* async function getById(id) {
   const requestOptions = {
