@@ -5,15 +5,17 @@ afterEach(() => {
   cleanup();
 });
 
-test("should render PersonGrid component", () => {
-  render(<PersonGrid />);
-  const element = screen.getByTestId("tid-1");
-  expect(element).toBeInTheDocument();
-  expect(element).toHaveTextContent("First name");
-  expect(element).toHaveTextContent("E-mail");
-  expect(element).toHaveTextContent("Gender");
-  expect(element).toHaveTextContent("IP address");
-  expect(element).toContainHTML("<table");
+describe("PersonGrid component", () => {
+  test("it renders PersonGrid component", () => {
+    render(<PersonGrid />);
+    const element = screen.getByTestId("tid-1");
+    expect(element).toBeInTheDocument();
+    expect(element).toHaveTextContent("First name");
+    expect(element).toHaveTextContent("E-mail");
+    expect(element).toHaveTextContent("Gender");
+    expect(element).toHaveTextContent("IP address");
+    expect(element).toContainHTML("<table");
+  });
 });
 
 describe("filterData function", () => {
