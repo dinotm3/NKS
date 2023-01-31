@@ -1,24 +1,32 @@
-import PersonRow from './PersonRow'
-import PersonGridFilter from './PersonGridFilter'
-import './PersonGrid.css'
-import { useState, useEffect } from 'react'
-import { filterData } from '../utils/filter'
+import React, { Profiler } from "react";
+import PersonRow from "./PersonRow";
+import PersonGridFilter from "./PersonGridFilter";
+import "./PersonGrid.css";
+import { useState, useEffect } from "react";
+import { filterData } from "../utils/filter";
 
 const PersonGrid = () => {
   const [data, setData] = useState([]);
   const [firstNamePrefix, setFirstNamePrefix] = useState("");
   const [onlyActive, setOnlyActive] = useState(false);
 
+  const logTimes = (id, phase, actualTime, baseTime, startTime, commitTime) => {
+    console.table({ id, phase, actualTime, baseTime, startTime, commitTime });
+  };
+
   useEffect(() => {
     async function fetchData() {
       var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
+        method: "GET",
+        redirect: "follow",
       };
-      
-      const response = await fetch("http://www.fulek.com/nks/api/aw/customers", requestOptions);
+
+      const response = await fetch(
+        "http://www.fulek.com/nks/api/aw/customers",
+        requestOptions
+      );
       const data = await response.json();
-      console.log(data);  
+      console.log(data);
       setData(data);
     }
     fetchData();
@@ -27,32 +35,35 @@ const PersonGrid = () => {
   const onFirstNameChangeHandler = (e) =>
     setFirstNamePrefix(e.target.value.toLowerCase());
 
-  const onOnlyActiveChangeHandler = (e) =>
-    setOnlyActive(e.target.checked);
+  const onOnlyActiveChangeHandler = (e) => setOnlyActive(e.target.checked);
 
   return (
-    <table data-testid="tid-1" className="styled-table">
-      <thead>
-        <tr>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>E-mail</th>
-          <th>Gender</th>
-          <th>IP address</th>
-        </tr>
-        {<PersonGridFilter 
-          onFirstNameChange={onFirstNameChangeHandler}
-          onOnlyActiveChange={onOnlyActiveChangeHandler} />}
-      </thead>
-      <tbody >
-        {filterData(data, firstNamePrefix, onlyActive).map((item) => {
-          return (<PersonRow key={item.Id} {...item}></PersonRow>)
-        })}
-      </tbody>
-      <tfoot></tfoot>
-    </table>
-  )
-}
+    <Profiler id="table-info" onRender={logTimes}>
+      <table data-testid="tid-1" className="styled-table">
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>E-mail</th>
+            <th>Gender</th>
+            <th>IP address</th>
+          </tr>
+          {
+            <PersonGridFilter
+              onFirstNameChange={onFirstNameChangeHandler}
+              onOnlyActiveChange={onOnlyActiveChangeHandler}
+            />
+          }
+        </thead>
+        <tbody>
+          {filterData(data, firstNamePrefix, onlyActive).map((item) => {
+            return <PersonRow key={item.Id} {...item}></PersonRow>;
+          })}
+        </tbody>
+        <tfoot></tfoot>
+      </table>
+    </Profiler>
+  );
+};
 
-
-export default PersonGrid
+export default PersonGrid;
