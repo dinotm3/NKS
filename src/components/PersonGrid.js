@@ -9,11 +9,10 @@ import { logTimes } from "../utils/logProfiler";
 const PersonGrid = () => {
   const [data, setData] = useState([]);
   const [firstNamePrefix, setFirstNamePrefix] = useState("");
+  const [lastNamePrefix, setlasttNamePrefix] = useState("");
   const [onlyActive, setOnlyActive] = useState(false);
 
-
   useEffect(() => {
-    // can not be pure because of setData
     async function fetchData() {
       var requestOptions = {
         method: "GET",
@@ -34,6 +33,9 @@ const PersonGrid = () => {
   const onFirstNameChangeHandler = (e) =>
     setFirstNamePrefix(e.target.value.toLowerCase());
 
+  const onLasttNameChangeHandler = (e) =>
+    setLastNamePrefix(e.target.value.toLowerCase());
+
   // Pure fuction, immutability of e
   const onOnlyActiveChangeHandler = (e) => setOnlyActive(e.target.checked);
 
@@ -52,6 +54,7 @@ const PersonGrid = () => {
             <PersonGridFilter
               onFirstNameChange={onFirstNameChangeHandler}
               onOnlyActiveChange={onOnlyActiveChangeHandler}
+              onLastNameChange={onLasttNameChangeHandler}
             />
           }
         </thead>

@@ -7,7 +7,7 @@ afterEach(() => {
 });
 
 
-// UI
+// Integration
 describe('PersonRow component', () => {
   it('renders the person row with active status correctly', () => {
     const props = {
@@ -20,7 +20,6 @@ describe('PersonRow component', () => {
     };
 
     const { container } = render(<PersonRow {...props} />);
-
     expect(getByText(container, 'John')).toBeInTheDocument();
     expect(getByText(container, 'Doe')).toBeInTheDocument();
     expect(getByText(container, 'johndoe@example.com')).toBeInTheDocument();
@@ -40,7 +39,6 @@ describe('PersonRow component', () => {
     };
 
     const { container } = render(<PersonRow {...props} />);
-
     expect(getByText(container, 'Jane')).toBeInTheDocument();
     expect(getByText(container, 'Doe')).toBeInTheDocument();
     expect(getByText(container, 'janedoe@example.com')).toBeInTheDocument();
@@ -62,7 +60,6 @@ describe('PersonRow component', () => {
     };
 
     const { getByText } = render(<PersonRow {...person} />);
-
     expect(getByText(person.Name)).toBeInTheDocument();
     expect(getByText(person.Surname)).toBeInTheDocument();
     expect(getByText(person.Email)).toBeInTheDocument();
@@ -93,7 +90,7 @@ describe('PersonRow component', () => {
       Email: 'janedoe@example.com',
       Telephone: '555-555-5555',
       CityId: '1',
-      is_active: true
+      is_active: false
     };
 
     const { container } = render(<PersonRow {...person} />);
