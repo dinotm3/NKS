@@ -45,8 +45,8 @@ const PersonGrid = () => {
             <th>First name</th>
             <th>Last name</th>
             <th>E-mail</th>
-            <th>Gender</th>
-            <th>IP address</th>
+            <th>Telephone</th>
+            <th>City code</th>
           </tr>
           {
             <PersonGridFilter

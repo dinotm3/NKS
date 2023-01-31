@@ -14,8 +14,8 @@ describe("PersonGrid component", () => {
     expect(element).toBeInTheDocument();
     expect(element).toHaveTextContent("First name");
     expect(element).toHaveTextContent("E-mail");
-    expect(element).toHaveTextContent("Gender");
-    expect(element).toHaveTextContent("IP address");
+    expect(element).toHaveTextContent("Telephone");
+    expect(element).toHaveTextContent("City code");
     expect(element).toContainHTML("<table");
   });
 });
@@ -36,7 +36,7 @@ describe("filterData function", () => {
     ]);
   });
 
-  test("it only returns active data when onlyActive is true", () => {
+  it("only returns active data when onlyActive is true", () => {
     const data = [
       { Name: "John", is_active: true },
       { Name: "Jane", is_active: false },
