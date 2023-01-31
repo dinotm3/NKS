@@ -39,7 +39,7 @@ const PersonGrid = () => {
       });
 
   return (
-    <table className="styled-table">
+    <table data-testid="tid-1" className="styled-table">
       <thead>
         <tr>
           <th>First name</th>
@@ -52,7 +52,7 @@ const PersonGrid = () => {
           onFirstNameChange={onFirstNameChangeHandler}
           onOnlyActiveChange={onOnlyActiveChangeHandler} />}
       </thead>
-      <tbody>
+      <tbody >
         {filterData().map((item) => {
           return (<PersonRow key={item.id} {...item}></PersonRow>)
         })}
