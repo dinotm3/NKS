@@ -8,7 +8,6 @@ class User {
     onLogout() {}
 }
 
-
 class RegisterUser {
     onRegister() {}
 }
