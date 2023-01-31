@@ -4,15 +4,13 @@ import PersonGridFilter from "./PersonGridFilter";
 import "./PersonGrid.css";
 import { useState, useEffect } from "react";
 import { filterData } from "../utils/filter";
+import { logTimes } from "../utils/logProfiler";
 
 const PersonGrid = () => {
   const [data, setData] = useState([]);
   const [firstNamePrefix, setFirstNamePrefix] = useState("");
   const [onlyActive, setOnlyActive] = useState(false);
 
-  const logTimes = (id, phase, actualTime, baseTime, startTime, commitTime) => {
-    console.table({ id, phase, actualTime, baseTime, startTime, commitTime });
-  };
 
   useEffect(() => {
     // can not be pure because of setData
