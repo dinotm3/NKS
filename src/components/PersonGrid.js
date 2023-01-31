@@ -46,7 +46,7 @@ const PersonGrid = () => {
       </thead>
       <tbody >
         {filterData(data, firstNamePrefix, onlyActive).map((item) => {
-          return (<PersonRow key={item.id} {...item}></PersonRow>)
+          return (<PersonRow key={item.Id} {...item}></PersonRow>)
         })}
       </tbody>
       <tfoot></tfoot>
