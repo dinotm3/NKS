@@ -85,4 +85,19 @@ describe('PersonRow component', () => {
     const tr = container.querySelector('tr');
     expect(tr).toHaveClass('strikethrough');
   });
+
+  it('renders without the strikethrough class when is_active is true', () => {
+    const person = {
+      Name: 'Jane',
+      Surname: 'Doe',
+      Email: 'janedoe@example.com',
+      Telephone: '555-555-5555',
+      CityId: '1',
+      is_active: true
+    };
+
+    const { container } = render(<PersonRow {...person} />);
+    const tr = container.querySelector('tr');
+    expect(tr).not.toHaveClass('strikethrough');
+  });
 });

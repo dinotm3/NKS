@@ -8,7 +8,7 @@
 }
 
 .styled-table thead tr {
-  background-color: #648d85;
+  background-color: #6c648d;
   color: #ffffff;
   text-align: left;
 }
@@ -23,7 +23,7 @@
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-  background-color: #b4b4b4;
+  background-color: #ffffff;
 }
 
 .styled-table tbody tr:last-of-type {
