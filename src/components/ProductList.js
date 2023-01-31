@@ -12,29 +12,30 @@ const ProductList = () => {
         redirect: 'follow'
       };
       
-      fetch("http://www.fulek.com/nks/api/aw/customers", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+      const response = await fetch("http://www.fulek.com/nks/api/aw/customers", requestOptions);
+      const data = await response.json();
+      console.log(data);  
+      setProducts(data);      
     }
     fetchData();
   }, []);
 
   return (
     <>
-      <table>
+      <table cellSpacing="2px">
         <thead>
           <tr>
             <th>Name</th>
+            <th>Surname</th>
           </tr>
         </thead>
       </table>
-      <div>
+      <ul>
         {" "}
         {products.map((product) => (
-          <div key={product.id}>{product.name}</div>
+          <li key={product.Id}>{product.Name}</li>
         ))}
-      </div>
+      </ul>
     </>
   );
 };
