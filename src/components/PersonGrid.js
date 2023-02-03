@@ -4,12 +4,13 @@ import PersonGridFilter from "./PersonGridFilter";
 import "./PersonGrid.css";
 import { useState, useEffect } from "react";
 import { filterData } from "../utils/filter";
-import { logTimes } from "../utils/logProfiler";
 
 const PersonGrid = () => {
   const [data, setData] = useState([]);
   const [firstNamePrefix, setFirstNamePrefix] = useState("");
   const [lastNamePrefix, setLastNamePrefix] = useState("");
+  const [emailPrefix, setEmailPrefix] = useState("");
+  const [telephonePrefix, setTelephonePrefix] = useState("");
   const [onlyActive, setOnlyActive] = useState(false);
 
   useEffect(() => {
@@ -32,8 +33,14 @@ const PersonGrid = () => {
   const onFirstNameChangeHandler = (e) =>
     setFirstNamePrefix(e.target.value.toLowerCase());
 
-  const onLasttNameChangeHandler = (e) =>
+  const onLastNameChangeHandler = (e) =>
     setLastNamePrefix(e.target.value.toLowerCase());
+
+  const onEmailChangeHandler = (e) =>
+    setEmailPrefix(e.target.value.toLowerCase());
+
+  const onTelephoneChangeHandler = (e) =>
+    setTelephonePrefix(e.target.value.toLowerCase());
 
   const onOnlyActiveChangeHandler = (e) => setOnlyActive(e.target.checked);
 
@@ -45,18 +52,19 @@ const PersonGrid = () => {
           <th>Last name</th>
           <th>E-mail</th>
           <th>Telephone</th>
-          <th>City code</th>
         </tr>
         {
           <PersonGridFilter
             onFirstNameChange={onFirstNameChangeHandler}
+            onLastNameChange={onLastNameChangeHandler}
+            onEmailChange={onEmailChangeHandler}
+            onTelephoneChange={onTelephoneChangeHandler}
             onOnlyActiveChange={onOnlyActiveChangeHandler}
-            onLastNameChange={onLasttNameChangeHandler}
           />
         }
       </thead>
       <tbody>
-        {filterData(data, firstNamePrefix, lastNamePrefix, onlyActive).map(
+        {filterData(data, firstNamePrefix, lastNamePrefix, emailPrefix, telephonePrefix, onlyActive).map(
           (item) => {
             return <PersonRow key={item.Id} {...item}></PersonRow>;
           }

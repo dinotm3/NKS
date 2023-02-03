@@ -7,7 +7,6 @@ const PersonRow = (props) => {
         <td>{props.Surname}</td>
         <td>{props.Email}</td>
         <td>{props.Telephone}</td>
-        <td>{props.CityId}</td>
       </tr>
   );
 };

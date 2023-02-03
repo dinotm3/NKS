@@ -1,22 +1,11 @@
-const filterData = (data, firstNamePrefix, lastNamePrefix, onlyActive) =>
+const filterData = (data, firstNamePrefix, lastNamePrefix, emailPrefix, telephonePrefix, onlyActive) =>
   data.filter((item) => {
-    const fnLower = item.Name.toLowerCase().startsWith(firstNamePrefix);
-    const lnLower = item.Surname.toLowerCase().startsWith(lastNamePrefix);
+    const firstNames = item.Name.toLowerCase().startsWith(firstNamePrefix);
+    const lastNames = item.Surname.toLowerCase().startsWith(lastNamePrefix);
+    const emails = item.Email.toLowerCase().startsWith(emailPrefix);
+    const telephones = item.Telephone.toLowerCase().startsWith(telephonePrefix);
     const active = !onlyActive || (onlyActive && item.is_active);
-    return fnLower && lnLower && active;
+    return firstNames && lastNames && emails && telephones && active;
   });
-
-// Functional version (destructured)
-// const filterData = (data, firstNamePrefix, onlyActive) =>
-//   data
-//     .map((item) => ({
-//       ...item,
-//       Name: item.Name.toLowerCase(),
-//     }))
-//     .filter(
-//       (item) =>
-//         item.Name.startsWith(firstNamePrefix.toLowerCase()) &&
-//         (!onlyActive || item.is_active)
-//     );
 
 export { filterData };

@@ -9,17 +9,14 @@ const PersonGridFilter = (props) => {
           <input type="text" onChange={props.onLastNameChange} />
         </td>
         <td>
-          <input type="text" />
+          <input type="text" onChane={props.onEmailChange}/>
         </td>
         <td>
-          <input type="text" />
-        </td>
-        <td>
-          <input type="text" />
+          <input type="text" onChange={props.onTelephoneChange}/>
         </td>
       </tr>
       <tr>
-        <td colSpan={5}>
+        <td colSpan={4}>
           <label>
             <input type="checkbox" onChange={props.onOnlyActiveChange} /> Only
             active
