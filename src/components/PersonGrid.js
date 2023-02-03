@@ -9,7 +9,7 @@ import { logTimes } from "../utils/logProfiler";
 const PersonGrid = () => {
   const [data, setData] = useState([]);
   const [firstNamePrefix, setFirstNamePrefix] = useState("");
-  const [lastNamePrefix, setlasttNamePrefix] = useState("");
+  const [lastNamePrefix, setLastNamePrefix] = useState("");
   const [onlyActive, setOnlyActive] = useState(false);
 
   useEffect(() => {
