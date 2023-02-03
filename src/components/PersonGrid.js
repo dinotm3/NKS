@@ -29,43 +29,41 @@ const PersonGrid = () => {
     fetchData();
   }, []);
 
-  // Pure fuction, immutability of e
   const onFirstNameChangeHandler = (e) =>
     setFirstNamePrefix(e.target.value.toLowerCase());
 
   const onLasttNameChangeHandler = (e) =>
     setLastNamePrefix(e.target.value.toLowerCase());
 
-  // Pure fuction, immutability of e
   const onOnlyActiveChangeHandler = (e) => setOnlyActive(e.target.checked);
 
   return (
-    <Profiler id="table-info" onRender={logTimes}>
-      <table data-testid="tid-1" className="styled-table">
-        <thead>
-          <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>E-mail</th>
-            <th>Telephone</th>
-            <th>City code</th>
-          </tr>
-          {
-            <PersonGridFilter
-              onFirstNameChange={onFirstNameChangeHandler}
-              onOnlyActiveChange={onOnlyActiveChangeHandler}
-              onLastNameChange={onLasttNameChangeHandler}
-            />
-          }
-        </thead>
-        <tbody>
-          {filterData(data, firstNamePrefix, onlyActive).map((item) => {
+    <table className="styled-table">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>E-mail</th>
+          <th>Telephone</th>
+          <th>City code</th>
+        </tr>
+        {
+          <PersonGridFilter
+            onFirstNameChange={onFirstNameChangeHandler}
+            onOnlyActiveChange={onOnlyActiveChangeHandler}
+            onLastNameChange={onLasttNameChangeHandler}
+          />
+        }
+      </thead>
+      <tbody>
+        {filterData(data, firstNamePrefix, lastNamePrefix, onlyActive).map(
+          (item) => {
             return <PersonRow key={item.Id} {...item}></PersonRow>;
-          })}
-        </tbody>
-        <tfoot></tfoot>
-      </table>
-    </Profiler>
+          }
+        )}
+      </tbody>
+      <tfoot></tfoot>
+    </table>
   );
 };
 

@@ -1,17 +1,14 @@
-import React, { Profiler } from "react";
-import { logTimes } from "../utils/logProfiler";
+import React from "react";
 
 const PersonRow = (props) => {
   return (
-    //<Profiler id="row-info" onRender={logTimes}>
-      <tr data-testid="tid-2" className={props.is_active ? undefined : "strikethrough"}>
+      <tr>
         <td>{props.Name}</td>
         <td>{props.Surname}</td>
         <td>{props.Email}</td>
         <td>{props.Telephone}</td>
         <td>{props.CityId}</td>
       </tr>
-    //</Profiler>
   );
 };
 

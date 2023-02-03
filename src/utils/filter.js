@@ -1,8 +1,9 @@
-const filterData = (data, firstNamePrefix, onlyActive) =>
+const filterData = (data, firstNamePrefix, lastNamePrefix, onlyActive) =>
   data.filter((item) => {
-    const fnLowerTest = item.Name.toLowerCase().startsWith(firstNamePrefix);
-    const activeTest = !onlyActive || (onlyActive && item.is_active);
-    return fnLowerTest && activeTest;
+    const fnLower = item.Name.toLowerCase().startsWith(firstNamePrefix);
+    const lnLower = item.Surname.toLowerCase().startsWith(lastNamePrefix);
+    const active = !onlyActive || (onlyActive && item.is_active);
+    return fnLower && lnLower && active;
   });
 
 // Functional version (destructured)
