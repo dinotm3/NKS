@@ -1,26 +1,18 @@
 const PersonGridFilter = (props) => {
   return (
     <>
-      <tr>
+      <tr className="bg-yellow-100">
         <td>
-          <input type="text" onChange={props.onFirstNameChange} />
+          <input type="text" onChange={props.onFirstNameChange} placeholder="Filter by name" />
         </td>
         <td>
-          <input type="text" onChange={props.onLastNameChange} />
+          <input type="text" onChange={props.onLastNameChange} placeholder="Filter by last name" />
         </td>
         <td>
-          <input type="text" onChane={props.onEmailChange}/>
+          <input type="text" onChange={props.onEmailChange} placeholder="Filter by email" />
         </td>
         <td>
-          <input type="text" onChange={props.onTelephoneChange}/>
-        </td>
-      </tr>
-      <tr>
-        <td colSpan={4}>
-          <label>
-            <input type="checkbox" onChange={props.onOnlyActiveChange} /> Only
-            active
-          </label>
+          <input type="text" onChange={props.onTelephoneChange} placeholder="Filter by telephone" />
         </td>
       </tr>
     </>

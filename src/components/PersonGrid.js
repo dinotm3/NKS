@@ -1,7 +1,6 @@
 import React, { Profiler } from "react";
 import PersonRow from "./PersonRow";
 import PersonGridFilter from "./PersonGridFilter";
-import "./PersonGrid.css";
 import { useState, useEffect } from "react";
 import { filterData } from "../utils/filter";
 
@@ -11,7 +10,6 @@ const PersonGrid = () => {
   const [lastNamePrefix, setLastNamePrefix] = useState("");
   const [emailPrefix, setEmailPrefix] = useState("");
   const [telephonePrefix, setTelephonePrefix] = useState("");
-  const [onlyActive, setOnlyActive] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -42,16 +40,14 @@ const PersonGrid = () => {
   const onTelephoneChangeHandler = (e) =>
     setTelephonePrefix(e.target.value.toLowerCase());
 
-  const onOnlyActiveChangeHandler = (e) => setOnlyActive(e.target.checked);
-
   return (
-    <table className="styled-table">
-      <thead>
-        <tr>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>E-mail</th>
-          <th>Telephone</th>
+    <table className="table auto">
+      <thead className="border-b">
+        <tr className= "text-sm font-large text-gray-900 px-6 py-4 border-r">
+          <th className= "bg-gray-300">First name</th>
+          <th className= "bg-gray-300">Last name</th>
+          <th className= "bg-gray-300">E-mail</th>
+          <th className= "bg-gray-300">Telephone</th>
         </tr>
         {
           <PersonGridFilter
@@ -59,12 +55,11 @@ const PersonGrid = () => {
             onLastNameChange={onLastNameChangeHandler}
             onEmailChange={onEmailChangeHandler}
             onTelephoneChange={onTelephoneChangeHandler}
-            onOnlyActiveChange={onOnlyActiveChangeHandler}
           />
         }
       </thead>
-      <tbody>
-        {filterData(data, firstNamePrefix, lastNamePrefix, emailPrefix, telephonePrefix, onlyActive).map(
+      <tbody className="border-b">
+        {filterData(data, firstNamePrefix, lastNamePrefix, emailPrefix, telephonePrefix, ).map(
           (item) => {
             return <PersonRow key={item.Id} {...item}></PersonRow>;
           }
