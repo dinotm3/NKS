@@ -1,7 +1,7 @@
 const PersonGridFilter = (props) => {
   return (
     <>
-      <tr className="bg-yellow-100">
+      <tr className="bg-gray-100">
         <td>
           <input type="text" onChange={props.onFirstNameChange} placeholder="Filter by name" />
         </td>

@@ -43,7 +43,7 @@ const PersonGrid = () => {
   return (
     <table className="table auto">
       <thead className="border-b">
-        <tr className= "text-sm font-large text-gray-900 px-6 py-4 border-r">
+        <tr className= "text-sm font-large text-teal-900 px-6 py-4 border-r">
           <th className= "bg-gray-300">First name</th>
           <th className= "bg-gray-300">Last name</th>
           <th className= "bg-gray-300">E-mail</th>
