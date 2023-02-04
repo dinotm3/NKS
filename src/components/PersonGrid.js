@@ -1,4 +1,4 @@
-import React, { Profiler } from "react";
+import React from "react";
 import PersonRow from "./PersonRow";
 import PersonGridFilter from "./PersonGridFilter";
 import { useState, useEffect } from "react";
