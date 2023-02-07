@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import headers from "../../utils/constants";
+import React, { useState, useEffect, createContext, useContext } from "react";
 
 const Login = () => {
   const [data, setData] = useState([]);
-
+  const [token, setToken] = useState('');
+  const isLoggedIn = token;
   useEffect(() => {
-    async function fetchData() {
+    async function login() {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -28,11 +28,16 @@ const Login = () => {
       const data = await response.json();
       console.log(data);
       setData(data);
+      localStorage.setItem("token", data.token)
+      // on Logout localStorage.clear()
+      console.log(localStorage);
     }
-    fetchData();
+    login();
   }, []);
 
-  return <h1>Hello {data.username}</h1>;
+  return (
+  <h1>Hello {data.username}</h1>
+  )
 };
 
 export default Login;
