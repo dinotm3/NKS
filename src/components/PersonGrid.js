@@ -12,9 +12,6 @@ const PersonGrid = () => {
   const [emailPrefix, setEmailPrefix] = useState("");
   const [telephonePrefix, setTelephonePrefix] = useState("");
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(20);
-
   useEffect(() => {
     async function fetchData() {
       var requestOptions = {
@@ -44,11 +41,15 @@ const PersonGrid = () => {
   const onTelephoneChangeHandler = (e) =>
     setTelephonePrefix(e.target.value.toLowerCase());
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostPerPage] = useState(20);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
 
+  const changePostsPerPage = (event) => setPostPerPage(event.target.value);
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <table className="table auto">
       <thead className="border-b">
@@ -78,6 +79,23 @@ const PersonGrid = () => {
           return <PersonRow key={item.Id} {...item}></PersonRow>;
         })}
       </tbody>
+
+      <label
+        for="pages"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >
+        Select posts per page
+      </label>
+      <select
+        id="pages"
+        onChange={changePostsPerPage}
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      >
+        <option selected>{postsPerPage}</option>
+        <option>5</option>;<option>10</option>;<option>20</option>;
+        <option>50</option><option>{data.length}</option>;
+      </select>
+
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={data.length}
