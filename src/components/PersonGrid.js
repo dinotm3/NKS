@@ -14,6 +14,7 @@ const PersonGrid = () => {
 
   useEffect(() => {
     async function fetchData() {
+      console.log(localStorage.getItem("token"));
       var requestOptions = {
         method: "GET",
         redirect: "follow",
@@ -51,50 +52,38 @@ const PersonGrid = () => {
   const changePage = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <table className="table auto">
-      <thead className="border-b">
-        <tr className="text-sm font-large text-teal-900 px-6 py-4 border-r">
-          <th className="bg-gray-300">First name</th>
-          <th className="bg-gray-300">Last name</th>
-          <th className="bg-gray-300">E-mail</th>
-          <th className="bg-gray-300">Telephone</th>
-        </tr>
-        {
-          <PersonGridFilter
-            onFirstNameChange={onFirstNameChangeHandler}
-            onLastNameChange={onLastNameChangeHandler}
-            onEmailChange={onEmailChangeHandler}
-            onTelephoneChange={onTelephoneChangeHandler}
-          />
-        }
-      </thead>
-      <tbody className="border-b">
-        {filterData(
-          currentPosts,
-          firstNamePrefix,
-          lastNamePrefix,
-          emailPrefix,
-          telephonePrefix
-        ).map((item) => {
-          return <PersonRow key={item.Id} {...item}></PersonRow>;
-        })}
-      </tbody>
+    <>
+      <table className="table auto">
+        <thead className="border-b">
+          <tr className="text-sm font-large text-teal-900 px-6 py-4 border-r">
+            <th className="bg-gray-300">First name</th>
+            <th className="bg-gray-300">Last name</th>
+            <th className="bg-gray-300">E-mail</th>
+            <th className="bg-gray-300">Telephone</th>
+          </tr>
+          {
+            <PersonGridFilter
+              onFirstNameChange={onFirstNameChangeHandler}
+              onLastNameChange={onLastNameChangeHandler}
+              onEmailChange={onEmailChangeHandler}
+              onTelephoneChange={onTelephoneChangeHandler}
+            />
+          }
+        </thead>
+        <tbody className="border-b">
+          {filterData(
+            currentPosts,
+            firstNamePrefix,
+            lastNamePrefix,
+            emailPrefix,
+            telephonePrefix
+          ).map((item) => {
+            return <PersonRow key={item.Id} {...item}></PersonRow>;
+          })}
+        </tbody>
 
-      <label
-        for="pages"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >
-        Select posts per page
-      </label>
-      <select
-        id="pages"
-        onChange={changePostsPerPage}
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      >
-        <option selected>{postsPerPage}</option>
-        <option>5</option>;<option>10</option>;<option>20</option>;
-        <option>50</option><option>{data.length}</option>;
-      </select>
+        <tfoot></tfoot>
+      </table>
 
       <Pagination
         postsPerPage={postsPerPage}
@@ -103,8 +92,23 @@ const PersonGrid = () => {
         currentPage={currentPage}
       />
 
-      <tfoot></tfoot>
-    </table>
+      <label
+        htmlFor="pages"
+        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >
+        Select posts per page
+      </label>
+      <select
+        id="pages"
+        onChange={changePostsPerPage}
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      >
+        <option value={postsPerPage}>{postsPerPage}</option>
+        <option>5</option>;<option>10</option>;<option>20</option>;
+        <option>50</option>
+        <option>{data.length}</option>;
+      </select>
+    </>
   );
 };
 
