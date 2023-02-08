@@ -21,6 +21,8 @@ const PersonGrid = () => {
         .then((response) => {
           console.log(response.data);
           setData(response.data);
+        }).catch(err => {
+          console.log(err);
         });
     }
     fetchData();

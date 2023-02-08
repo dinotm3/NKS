@@ -23,6 +23,8 @@ const Login = () => {
         console.log(response.data);
         setData(response.data);
         localStorage.setItem("token", response.data.token);
+      }).catch(err => {
+        console.log(err);
       });
 
     // on Logout localStorage.clear()
