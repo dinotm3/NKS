@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import getToken from "../utils/storage";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-// Add / delete, customer info, bills, bill items
 const Add = () => {
-  const axios = require("axios");
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -17,30 +16,20 @@ const Add = () => {
 
   async function addCustomer() {
     let token = getToken();
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer " + token);
-
-    var raw = JSON.stringify({
-      Name: name,
-      Surname: surname,
-      Email: email,
-      Telephone: email,
-      CityID: 1,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("http://www.fulek.com/nks/api/aw/addcustomer", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+    axios
+      .post("http://www.fulek.com/nks/api/aw/addcustomer", {
+        Name: name,
+        Surname: surname,
+        Email: email,
+        Telephone: email,
+        CityID: 1,
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
   }
+
   useEffect(() => {
     let token = getToken();
     if (token == null) {

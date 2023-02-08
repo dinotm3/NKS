@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [data, setData] = useState([]);
@@ -13,30 +14,17 @@ const Login = () => {
   const onPasswordChange = (e) => setPassword(e.target.value.toLowerCase());
 
   async function login() {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    axios
+      .post("http://www.fulek.com/nks/api/aw/login", {
+        username: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+        localStorage.setItem("token", response.data.token);
+      });
 
-    // finodino@user.com, 12345
-    var raw = JSON.stringify({
-      username: email,
-      password: password,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    const response = await fetch(
-      "http://www.fulek.com/nks/api/aw/login",
-      requestOptions
-    );
-    const data = await response.json();
-    console.log(data);
-    setData(data);
-    localStorage.setItem("token", data.token);
     // on Logout localStorage.clear()
     console.log(localStorage);
     navigate("/");

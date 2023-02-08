@@ -1,34 +1,23 @@
 import React, { useState, useEffect } from "react";
 import getToken from "../utils/storage";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Delete = () => {
-  const axios = require("axios");
   const navigate = useNavigate();
   const [id, setId] = useState();
   const onIdChange = (e) => setId(e.target.value.toLowerCase());
 
   async function deleteCustomer() {
     let token = getToken();
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer " + token);
-
-    var raw = JSON.stringify({
-      Id: id,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("http://www.fulek.com/nks/api/aw/deletecustomer", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+    axios
+      .post("http://www.fulek.com/nks/api/aw/deletecustomer", {
+        Id: id,
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
   }
   useEffect(() => {
     let token = getToken();

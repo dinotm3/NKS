@@ -4,6 +4,7 @@ import PersonGridFilter from "./PersonGridFilter";
 import Pagination from "./Pagination";
 import { useState, useEffect } from "react";
 import { filterData } from "../utils/filter";
+import axios from "axios";
 
 const PersonGrid = () => {
   const [data, setData] = useState([]);
@@ -15,17 +16,11 @@ const PersonGrid = () => {
   useEffect(() => {
     async function fetchData() {
       console.log(localStorage.getItem("token"));
-      var requestOptions = {
-        method: "GET",
-        redirect: "follow",
-      };
-      const response = await fetch(
-        "http://www.fulek.com/nks/api/aw/customers",
-        requestOptions
-      );
-      const data = await response.json();
-      console.log(data);
-      setData(data);
+      axios.get("http://www.fulek.com/nks/api/aw/customers").then((response) => {
+        console.log(response.data);
+        setData(response.data);
+      })
+
     }
     fetchData();
   }, []);
