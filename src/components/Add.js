@@ -22,7 +22,7 @@ const Add = () => {
         Name: name,
         Surname: surname,
         Email: email,
-        Telephone: email,
+        Telephone: telephone,
         CityID: 1,
       })
       .then((response) => {
