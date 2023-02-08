@@ -16,11 +16,12 @@ const PersonGrid = () => {
   useEffect(() => {
     async function fetchData() {
       console.log(localStorage.getItem("token"));
-      axios.get("http://www.fulek.com/nks/api/aw/customers").then((response) => {
-        console.log(response.data);
-        setData(response.data);
-      })
-
+      axios
+        .get("http://www.fulek.com/nks/api/aw/customers")
+        .then((response) => {
+          console.log(response.data);
+          setData(response.data);
+        });
     }
     fetchData();
   }, []);
