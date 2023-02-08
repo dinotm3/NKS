@@ -21,6 +21,11 @@ const navs = [
   },
   {
     key: "7",
+    path: "/edit",
+    name: "Edit",
+  },
+  {
+    key: "8",
     path: "/delete",
     name: "Delete",
   },
@@ -50,13 +55,13 @@ const Nav = () => {
         ))}
         {!isLogged ? (
           <li key="2">
-            <NavLink to="/login" className="text-teal-100">
+            <NavLink to="/login" className="text-teal-100" onClick={isLoggedIn}>
               Login
             </NavLink>
           </li>
         ) : (
           <li key="3">
-            <NavLink to="/logout" className="text-teal-100">
+            <NavLink to="/logout" className="text-teal-100" onClick={isLoggedIn}>
               Logout
             </NavLink>
           </li>

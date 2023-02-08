@@ -7,6 +7,8 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Logout from "./components/auth/Logout";
 import Add from "./components/Add";
+import Edit from "./components/Edit";
+import Delete from "./components/Delete";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/logout" element={<Logout />}></Route>
           <Route path="/add" element={<Add />}></Route>
+          <Route path="/edit" element={<Edit />}></Route>
+          <Route path="/delete" element={<Delete />}></Route>
         </Routes>
         <Footer />
       </Router>

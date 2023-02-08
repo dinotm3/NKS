@@ -1,25 +1,21 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect } from "react";
+import getToken from "../utils/storage";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [data, setData] = useState([]);
-  const [token, setToken] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Delete = () => {
+  const axios = require("axios");
   const navigate = useNavigate();
+  const [id, setId] = useState();
+  const onIdChange = (e) => setId(e.target.value.toLowerCase());
 
-  const onEmailChange = (e) => setEmail(e.target.value.toLowerCase());
-
-  const onPasswordChange = (e) => setPassword(e.target.value.toLowerCase());
-
-  async function login() {
+  async function deleteCustomer() {
+    let token = getToken();
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", "Bearer " + token);
 
-    // finodino@user.com, 12345
     var raw = JSON.stringify({
-      username: email,
-      password: password,
+      Id: id,
     });
 
     var requestOptions = {
@@ -29,20 +25,14 @@ const Login = () => {
       redirect: "follow",
     };
 
-    const response = await fetch(
-      "http://www.fulek.com/nks/api/aw/login",
-      requestOptions
-    );
-    const data = await response.json();
-    console.log(data);
-    setData(data);
-    localStorage.setItem("token", data.token);
-    // on Logout localStorage.clear()
-    console.log(localStorage);
-    navigate("/");
+    fetch("http://www.fulek.com/nks/api/aw/deletecustomer", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   }
   useEffect(() => {
-    if (localStorage.getItem("token") != null) {
+    let token = getToken();
+    if (token == null) {
       navigate("/");
     }
   }, []);
@@ -63,38 +53,19 @@ const Login = () => {
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Email address"
-                  onChange={onEmailChange}
-                />
-              </div>
-
-              <div className="mb-6">
-                <input
-                  type="password"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="exampleFormControlInput2"
-                  placeholder="Password"
-                  onChange={onPasswordChange}
+                  placeholder="Customer ID"
+                  onChange={onIdChange}
                 />
               </div>
 
               <div className="text-center lg:text-left">
                 <button
                   type="button"
-                  onClick={login}
+                  onClick={deleteCustomer}
                   className="inline-block px-7 py-3 bg-teal-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
-                  Login
+                  Delete Customer
                 </button>
-                <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-                  Don't have an account?
-                  <a
-                    href="#!"
-                    className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                  >
-                    Register
-                  </a>
-                </p>
               </div>
             </form>
           </div>
@@ -104,4 +75,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Delete;
